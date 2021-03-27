@@ -22,7 +22,7 @@ if [[ $BOOT_SUPPORT_SPI == yes ]]; then
     UBOOT_TARGET_MAP="BL31=$RKBIN_DIR/$BL31_BLOB tpl/u-boot-tpl.bin spl/u-boot-spl.bin u-boot.itb ${UBOOT_TARGET_MAP} rkspi_loader.img"
 fi
 
-make rock-pi-4-rk3399_defconfig
+make rock-pi-4a-rk3399_defconfig
 make -j$(getconf _NPROCESSORS_ONLN) CROSS_COMPILE=aarch64-linux-gnu-
 
 # tools/mkimage -n $BOOT_SOC -T rksd -d $RKBIN_DIR/$DDR_BLOB idbloader.bin
@@ -35,3 +35,9 @@ tools/mkimage -n $BOOT_SOC -T rkspi -d tpl/u-boot-tpl.bin:spl/u-boot-spl.bin rks
 dd if=/dev/zero of=rkspi_loader.img count=8128 status=none
 dd if=rkspi_tpl_spl.img of=rkspi_loader.img conv=notrunc status=none
 dd if=u-boot.itb of=rkspi_loader.img seek=768 conv=notrunc status=none
+
+#to flash
+# rkdeveloptool ld
+# sudo rkdeveloptool db path/to/rk3399_loader_spinor_v1.15.114.bin
+# sudo rkdeveloptool wl 0 rkspi_loader.img
+# 
