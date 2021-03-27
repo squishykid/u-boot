@@ -40,4 +40,4 @@ dd if=u-boot.itb of=rkspi_loader.img seek=768 conv=notrunc status=none
 # rkdeveloptool ld
 # sudo rkdeveloptool db path/to/rk3399_loader_spinor_v1.15.114.bin
 # sudo rkdeveloptool wl 0 rkspi_loader.img
-# 
+# sudo rkdeveloptool rd
